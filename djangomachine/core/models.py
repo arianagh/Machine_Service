@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, \
     PermissionsMixin
-from django.conf import settings
 
 
 class UserManager(BaseUserManager):
@@ -49,7 +48,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Car(models.Model):
     car_name = models.CharField(max_length=255)
     is_repair = models.BooleanField(default=False)
-    is_finished = models.BooleanField(default=False)   # yani bazdid konanade tayid krde
+    # yani bazdid konanade tayid krde
+    is_finished = models.BooleanField(default=False)
     part = models.ManyToManyField('CarPart')
 
     def __str__(self):
@@ -62,6 +62,3 @@ class CarPart(models.Model):
 
     def __str__(self):
         return self.part_name
-
-
-
