@@ -1,9 +1,33 @@
 from django.contrib import admin
 from core.models import Car, CarPart, User
+from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-admin.site.register(User)
+# admin.site.register(User)
 admin.site.register(CarPart)
 
+
+class UserAdmin(BaseUserAdmin):
+    ordering = ["id"]
+    list_display = ['email', 'role']
+    fieldsets = (
+        (None, {"fields": ("email", "password",'role')}),
+
+        (
+            "Permissions",
+            {"fields": ("is_active", "is_staff", "is_superuser")}
+        ),
+        ("Important dates", {"fields": ("last_login",)})
+    )
+
+    add_fieldsets = (
+        (None, {
+            "classes": ("wide", ),
+            "fields": ("email", "password1", "password2",'role','is_active','is_staff','is_superuser')
+        }),
+    )
+
+
+admin.site.register(User, UserAdmin)
 
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
