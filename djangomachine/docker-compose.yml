@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  django_web:
+    build: .
+#    command: >
+#      sh -c "python3 manage.py migrate && python manage.py runserver 0.0.0.0:8000"
+    command: >
+      sh -c "python3 manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - .:/djangomachine/
+    ports:
+      - "8000:8000"
+    restart: on-failure
+    env_file:
+      - ./.env
+    depends_on:
+      - db
+  db:
+    image: postgres:latest
+    container_name: "postgres_database"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=arian
+      - POSTGRES_PASSWORD=arian
+      - POSTGRES_DB=insta
+
+volumes:
+  postgres_data:
+  static:
+  media:

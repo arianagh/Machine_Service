@@ -1,6 +1,3 @@
-from django.contrib.auth import get_user_model
-from django.shortcuts import get_object_or_404
-from django.utils.timezone import now
 from rest_framework import serializers
 
 from core.models import Car, CarPart
@@ -13,14 +10,14 @@ class PartSerializer(serializers.ModelSerializer):
         fields = ['part_name']
 
 
-class ReciptionSerializer(serializers.ModelSerializer):
+class ReceptionSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Car
         fields = '__all__'
 
 
-class ReciptionDetailSerializer(serializers.ModelSerializer):
+class ReceptionDetailSerializer(serializers.ModelSerializer):
 
     part = PartSerializer(read_only=True, many=True)
 

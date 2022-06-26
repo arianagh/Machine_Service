@@ -2,7 +2,6 @@ from django.contrib import admin
 from core.models import Car, CarPart, User
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 
-# admin.site.register(User)
 admin.site.register(CarPart)
 
 
@@ -10,7 +9,7 @@ class UserAdmin(BaseUserAdmin):
     ordering = ["id"]
     list_display = ['email', 'role']
     fieldsets = (
-        (None, {"fields": ("email", "password",'role')}),
+        (None, {"fields": ("email", "password", 'role')}),
 
         (
             "Permissions",
@@ -21,19 +20,19 @@ class UserAdmin(BaseUserAdmin):
 
     add_fieldsets = (
         (None, {
-            "classes": ("wide", ),
-            "fields": ("email", "password1", "password2",'role','is_active','is_staff','is_superuser')
+            "classes": ("wide",),
+            "fields": ("email", "password1", "password2", 'role', 'is_active', 'is_staff', 'is_superuser')
         }),
     )
 
 
 admin.site.register(User, UserAdmin)
 
+
 @admin.register(Car)
 class CarAdmin(admin.ModelAdmin):
-    # chia to panel namayesh bede
+
     list_display = ("id", "car_name", "is_repair", 'is_finished')
-    # form = PostForm
     list_filter = ("is_repair", "is_finished")
     list_editable = ("is_repair", "is_finished")
 

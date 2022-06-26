@@ -5,7 +5,7 @@ from core.permissions import IsInspector, IsReception, IsTechnician, IsAuthentic
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from car.serializers import ReciptionSerializer, ReciptionDetailSerializer, PartListSerializer
+from car.serializers import ReceptionSerializer, ReceptionDetailSerializer, PartListSerializer
 from core.models import Car, CarPart
 
 
@@ -16,7 +16,7 @@ class CarListView(APIView):
     def get(self, request):
         qs = Car.objects.all()
         print(qs)
-        serializer = ReciptionSerializer(qs, many=True)
+        serializer = ReceptionSerializer(qs, many=True)
         return Response(serializer.data)
 
 
@@ -24,7 +24,7 @@ class CarDetailView(RetrieveAPIView):
 
     permission_classes = [IsAuthenticated]
     queryset = Car.objects.all()
-    serializer_class = ReciptionDetailSerializer
+    serializer_class = ReceptionDetailSerializer
 
 
 class PartListView(APIView):
