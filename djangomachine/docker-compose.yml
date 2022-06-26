@@ -24,7 +24,7 @@ services:
     environment:
       - POSTGRES_USER=arian
       - POSTGRES_PASSWORD=arian
-      - POSTGRES_DB=insta
+      - POSTGRES_DB=machine
 
 volumes:
   postgres_data:
